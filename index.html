@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- ─────────────────────────────  SEO  ───────────────────────────── -->
+  <title>Torsade Technologies — Data solutions for hospitality</title>
+  <meta
+    name="description"
+    content="Torsade Technologies Company Limited builds data-driven solutions for the hospitality industry — from analytics to discovery platforms like Yellow Grapes."
+  />
+
+  <!-- Canonical (TODO: set real domain before launch) -->
+  <link rel="canonical" href="https://torsade.com.tw/" />
+
+  <!-- Open Graph (link previews) -->
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Torsade Technologies" />
+  <meta property="og:title" content="Torsade Technologies — Data solutions for hospitality" />
+  <meta
+    property="og:description"
+    content="Data-driven solutions for the hospitality industry — from analytics to discovery platforms like Yellow Grapes."
+  />
+  <meta property="og:image" content="images/app-map.png" />
+  <meta property="og:url" content="https://torsade.com.tw/" />
+
+  <!-- Twitter card -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Torsade Technologies — Data solutions for hospitality" />
+  <meta
+    name="twitter:description"
+    content="Data-driven solutions for the hospitality industry — from analytics to discovery platforms like Yellow Grapes."
+  />
+  <meta name="twitter:image" content="images/app-map.png" />
+
+  <!-- Brand wordmark / heading font (Crimson Pro) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Crimson+Pro:wght@400;500;600;700&display=swap"
+    rel="stylesheet"
+  />
+
+  <!--
+    Tailwind CSS — local build (src/input.css → dist/output.css).
+    Run `npm run watch` while editing, or `npm run build` for a minified output.
+    The Tailwind theme (brand colors/fonts) lives in tailwind.config.js; the
+    :root design tokens below stay inline so they're tunable without a rebuild.
+  -->
+  <link rel="stylesheet" href="dist/output.css" />
+
+  <style>
+    /* ───────────  Tunable design tokens (single source of truth)  ─────────── */
+    :root {
+      --bg: #FFFFFF;            /* page background */
+      --bg-rgb: 255 255 255;    /* channels of --bg, for translucent header */
+
+      --header-border: #E5E5E5; /* hairline under header */
+      --header-opacity: 0.85;   /* header background translucency */
+      --header-blur: 12px;      /* backdrop blur behind header */
+      --header-h-desktop: 84px; /* logo + breathing room */
+      --header-h-mobile: 56px;
+
+      /* Foreground / text colors — strictly black & white/grey */
+      --fg: #0A0A0A;            /* primary text + wordmark */
+      --fg-muted: #6B6B6B;      /* secondary/body text */
+
+      /* Accent — black (intentionally no color) */
+      --accent: #0A0A0A;
+      --accent-muted: #404040;
+
+      /* Shared hairline border */
+      --border: #E5E5E5;
+
+      /* Wordmark (Crimson Pro, serif) */
+      --wordmark-size: 1.6rem;
+      --wordmark-weight: 600;
+      --wordmark-tracking: 0.02em;
+    }
+
+    html { scroll-behavior: smooth; }
+    body { background-color: var(--bg); }
+
+    /* Sticky, translucent, blurred header */
+    .site-header {
+      height: var(--header-h-desktop);
+      background-color: rgb(var(--bg-rgb) / var(--header-opacity));
+      -webkit-backdrop-filter: blur(var(--header-blur));
+      backdrop-filter: blur(var(--header-blur));
+      border-bottom: 1px solid var(--header-border);
+    }
+    @media (max-width: 640px) {
+      .site-header { height: var(--header-h-mobile); }
+    }
+
+    /* Offset in-page scroll targets so they clear the sticky header */
+    #services, #work, #contact {
+      scroll-margin-top: calc(var(--header-h-desktop) + 8px);
+    }
+
+    /* Wordmark type (tunable via the :root vars above — no rebuild needed) */
+    .tx-wordmark {
+      font-size: var(--wordmark-size);
+      font-weight: var(--wordmark-weight);
+      letter-spacing: var(--wordmark-tracking);
+      line-height: 1;
+    }
+
+    /* Right-column image: graceful fallback if the screenshot isn't present */
+    .img-fallback { padding: 3rem; opacity: 0.4; }
+  </style>
+</head>
+
+<body id="top" class="font-sans text-fg antialiased">
+
+  <!-- ─────────────────────────────  HEADER  ───────────────────────────── -->
+  <header class="site-header sticky top-0 z-50">
+    <div class="mx-auto flex h-full max-w-6xl items-center justify-between px-6 sm:px-8">
+      <!-- Left: wordmark -->
+      <a href="#top" class="flex items-center text-fg" aria-label="Torsade Technologies — home">
+        <span class="tx-wordmark font-brand">Torsade</span>
+      </a>
+
+      <!-- Right: nav + language toggle -->
+      <div class="flex items-center gap-6 sm:gap-8">
+        <nav class="hidden items-center gap-6 text-sm text-fgmuted sm:flex lg:gap-8">
+          <a href="#services" class="transition-colors hover:text-fg" data-i18n="nav.services">Services</a>
+          <a href="#work" class="transition-colors hover:text-fg" data-i18n="nav.work">Work</a>
+          <a href="#contact" class="transition-colors hover:text-fg" data-i18n="nav.contact">Contact</a>
+        </nav>
+        <button id="langToggle" type="button"
+                class="rounded-full border border-hairline px-3 py-1.5 text-xs font-semibold tracking-wide text-fg transition-colors hover:border-accent hover:text-accent sm:text-sm">
+          中
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <!-- ─────────────────────────────  HERO  ───────────────────────────── -->
+    <section class="mx-auto max-w-6xl px-6 pb-20 pt-16 sm:px-8 sm:pb-28 sm:pt-24">
+      <div class="max-w-3xl">
+        <p class="font-brand text-sm font-semibold uppercase tracking-[0.3em] text-fgmuted" data-i18n="hero.eyebrow">
+          Data for hospitality
+        </p>
+
+        <h1 class="mt-6 font-brand text-4xl font-semibold leading-[1.1] tracking-tight text-fg sm:text-6xl lg:text-7xl" data-i18n="hero.headline">
+          Turning hospitality<br />data into decisions.
+        </h1>
+
+        <p class="mt-7 max-w-xl text-base leading-relaxed text-fgmuted sm:text-lg" data-i18n="hero.subcopy">
+          Torsade Technologies builds data-driven solutions for the hospitality
+          industry — analytics, discovery platforms and bespoke tools that help
+          venues understand their guests and grow.
+        </p>
+
+        <div class="mt-10 flex flex-wrap items-center gap-4">
+          <a href="#contact"
+             class="inline-flex items-center justify-center rounded-md bg-accent px-7 py-3.5 text-base font-semibold tracking-wide text-bg transition-opacity hover:opacity-90"
+             data-i18n="hero.cta">
+            Get in touch
+          </a>
+          <a href="#work"
+             class="inline-flex items-center justify-center rounded-md border border-hairline px-7 py-3.5 text-base font-semibold tracking-wide text-fg transition-colors hover:border-accent"
+             data-i18n="hero.secondary">
+            See our work
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ─────────────────────────────  SERVICES  ───────────────────────── -->
+    <section id="services" class="border-t border-hairline">
+      <div class="mx-auto max-w-6xl px-6 py-16 sm:px-8 sm:py-24">
+        <p class="font-brand text-sm font-semibold uppercase tracking-[0.3em] text-fgmuted" data-i18n="services.eyebrow">
+          Services
+        </p>
+        <h2 class="mt-4 max-w-2xl font-brand text-3xl font-semibold tracking-tight text-fg sm:text-4xl" data-i18n="services.heading">
+          Solutions for the hospitality industry, powered by data.
+        </h2>
+
+        <div class="mt-12 grid gap-6 md:grid-cols-3">
+          <!-- Card 1 -->
+          <div class="rounded-lg border border-hairline p-7">
+            <h3 class="font-brand text-xl font-semibold text-fg" data-i18n="services.card1.title">
+              Data &amp; Analytics
+            </h3>
+            <p class="mt-3 text-sm leading-relaxed text-fgmuted" data-i18n="services.card1.body">
+              Dashboards and reporting that turn guest, sales and operational
+              data into clear, actionable insight.
+            </p>
+          </div>
+          <!-- Card 2 -->
+          <div class="rounded-lg border border-hairline p-7">
+            <h3 class="font-brand text-xl font-semibold text-fg" data-i18n="services.card2.title">
+              Discovery Platforms
+            </h3>
+            <p class="mt-3 text-sm leading-relaxed text-fgmuted" data-i18n="services.card2.body">
+              Consumer-facing apps and maps that connect guests with venues —
+              like our Yellow Grapes wine-discovery product.
+            </p>
+          </div>
+          <!-- Card 3 -->
+          <div class="rounded-lg border border-hairline p-7">
+            <h3 class="font-brand text-xl font-semibold text-fg" data-i18n="services.card3.title">
+              Consulting &amp; Integration
+            </h3>
+            <p class="mt-3 text-sm leading-relaxed text-fgmuted" data-i18n="services.card3.body">
+              We help teams unify their data sources and build the tooling that
+              fits how their business actually runs.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ─────────────────────────  WORK / CASE STUDY  ───────────────────── -->
+    <section id="work" class="border-t border-hairline">
+      <div class="mx-auto flex max-w-6xl flex-col-reverse gap-12 px-6 py-16 sm:px-8 sm:py-24
+                  md:grid md:grid-cols-2 md:items-center md:gap-16">
+        <!-- Left: case-study copy -->
+        <div>
+          <p class="font-brand text-sm font-semibold uppercase tracking-[0.3em] text-fgmuted" data-i18n="work.eyebrow">
+            A Torsade project
+          </p>
+          <h2 class="mt-4 font-brand text-3xl font-semibold tracking-tight text-fg sm:text-4xl">
+            Yellow Grapes
+          </h2>
+          <p class="mt-5 max-w-md text-base leading-relaxed text-fgmuted" data-i18n="work.body">
+            A wine-discovery map for Taiwan — bringing wine bars, cellars,
+            tastings and 12,000+ appellations together in one place. Built and
+            operated by Torsade as a showcase of data-driven discovery.
+          </p>
+          <a href="https://yellow.grapes.com.tw" target="_blank" rel="noopener"
+             class="mt-8 inline-flex items-center gap-2 text-base font-semibold text-fg underline-offset-4 transition-colors hover:text-accentmuted hover:underline"
+             data-i18n="work.link">
+            Visit Yellow Grapes →
+          </a>
+        </div>
+
+        <!-- Right: app screenshot -->
+        <div class="flex justify-center">
+          <img
+            src="images/app-map.png"
+            alt="Yellow Grapes app showing a map of wine merchants across Taipei, Taiwan"
+            class="w-full max-w-xs rounded-3xl border border-hairline shadow-xl"
+            loading="lazy"
+            onerror="this.onerror=null; this.classList.add('img-fallback');"
+          />
+        </div>
+      </div>
+    </section>
+
+    <!-- ─────────────────────────  ABOUT + CONTACT  ─────────────────────── -->
+    <section id="contact" class="border-t border-hairline">
+      <div class="mx-auto max-w-2xl px-6 py-16 text-center sm:px-8 sm:py-24">
+        <p class="font-brand text-sm font-semibold uppercase tracking-[0.3em] text-fgmuted" data-i18n="contact.eyebrow">
+          About &amp; Contact
+        </p>
+        <h2 class="mt-4 font-brand text-3xl font-semibold tracking-tight text-fg sm:text-4xl" data-i18n="contact.heading">
+          Let's build something with your data.
+        </h2>
+        <p class="mx-auto mt-5 max-w-md text-base leading-relaxed text-fgmuted" data-i18n="contact.body">
+          Torsade Technologies Company Limited is a service business helping the
+          hospitality industry make better use of its data. Tell us what you're
+          working on and we'll be in touch.
+        </p>
+        <a href="mailto:contact@torsade.com.tw"
+           class="mt-10 inline-flex items-center justify-center rounded-md bg-accent px-8 py-4 text-base font-semibold tracking-wide text-bg transition-opacity hover:opacity-90">
+          contact@torsade.com.tw
+        </a>
+      </div>
+    </section>
+  </main>
+
+  <!-- ─────────────────────────────  FOOTER  ───────────────────────────── -->
+  <footer class="border-t border-hairline">
+    <div class="mx-auto flex max-w-6xl flex-col items-center justify-between gap-6 px-6 py-8 sm:px-8 md:flex-row">
+      <!-- Wordmark (reused from header) -->
+      <a href="#top" class="flex items-center text-fg" aria-label="Torsade Technologies — home">
+        <span class="tx-wordmark font-brand">Torsade</span>
+      </a>
+
+      <nav class="flex items-center gap-8 text-sm text-fgmuted">
+        <a href="#services" class="transition-colors hover:text-fg" data-i18n="nav.services">Services</a>
+        <a href="#work" class="transition-colors hover:text-fg" data-i18n="nav.work">Work</a>
+        <a href="mailto:contact@torsade.com.tw" class="transition-colors hover:text-fg">contact@torsade.com.tw</a>
+      </nav>
+    </div>
+    <div class="mx-auto max-w-6xl px-6 pb-8 sm:px-8">
+      <p class="text-xs text-fgmuted" data-i18n="footer.copyright">
+        © 2026 Torsade Technologies Company Limited. All rights reserved.
+      </p>
+    </div>
+  </footer>
+
+  <script>
+    // ─────────────  i18n (English / 繁體中文)  ─────────────
+    // Static dictionary; values may contain markup (applied via innerHTML).
+    // Brand names ("Torsade", "Yellow Grapes") stay as-is in both languages.
+    var I18N = {
+      en: {
+        'nav.services': 'Services',
+        'nav.work': 'Work',
+        'nav.contact': 'Contact',
+        'hero.eyebrow': 'Data for hospitality',
+        'hero.headline': 'Turning hospitality<br />data into decisions.',
+        'hero.subcopy': 'Torsade Technologies builds data-driven solutions for the hospitality industry — analytics, discovery platforms and bespoke tools that help venues understand their guests and grow.',
+        'hero.cta': 'Get in touch',
+        'hero.secondary': 'See our work',
+        'services.eyebrow': 'Services',
+        'services.heading': 'Solutions for the hospitality industry, powered by data.',
+        'services.card1.title': 'Data & Analytics',
+        'services.card1.body': 'Dashboards and reporting that turn guest, sales and operational data into clear, actionable insight.',
+        'services.card2.title': 'Discovery Platforms',
+        'services.card2.body': 'Consumer-facing apps and maps that connect guests with venues — like our Yellow Grapes wine-discovery product.',
+        'services.card3.title': 'Consulting & Integration',
+        'services.card3.body': 'We help teams unify their data sources and build the tooling that fits how their business actually runs.',
+        'work.eyebrow': 'A Torsade project',
+        'work.body': 'A wine-discovery map for Taiwan — bringing wine bars, cellars, tastings and 12,000+ appellations together in one place. Built and operated by Torsade as a showcase of data-driven discovery.',
+        'work.link': 'Visit Yellow Grapes →',
+        'contact.eyebrow': 'About & Contact',
+        'contact.heading': "Let's build something with your data.",
+        'contact.body': "Torsade Technologies Company Limited is a service business helping the hospitality industry make better use of its data. Tell us what you're working on and we'll be in touch.",
+        'footer.copyright': '© 2026 Torsade Technologies Company Limited. All rights reserved.'
+      },
+      zh: {
+        'nav.services': '服務',
+        'nav.work': '案例',
+        'nav.contact': '聯絡',
+        'hero.eyebrow': '餐旅數據',
+        'hero.headline': '讓餐旅數據<br />化為決策。',
+        'hero.subcopy': 'Torsade Technologies 為餐旅產業打造以數據為核心的解決方案 — 包含數據分析、探索平台與客製化工具，協助業者了解顧客並持續成長。',
+        'hero.cta': '聯絡我們',
+        'hero.secondary': '查看案例',
+        'services.eyebrow': '服務',
+        'services.heading': '以數據驅動的餐旅產業解決方案。',
+        'services.card1.title': '數據與分析',
+        'services.card1.body': '透過儀表板與報表，將顧客、營收與營運數據轉化為清晰、可執行的洞察。',
+        'services.card2.title': '探索平台',
+        'services.card2.body': '連結顧客與店家的消費者應用程式與地圖 — 例如我們的葡萄酒探索產品 Yellow Grapes。',
+        'services.card3.title': '顧問與整合',
+        'services.card3.body': '協助團隊整合各項數據來源，並打造真正貼合營運方式的工具。',
+        'work.eyebrow': 'Torsade 專案',
+        'work.body': '專為台灣打造的葡萄酒探索地圖 — 將葡萄酒吧、酒窖、品飲活動與超過 12,000 種產區匯聚於同一處。由 Torsade 開發與營運，展現數據驅動探索的可能。',
+        'work.link': '前往 Yellow Grapes →',
+        'contact.eyebrow': '關於與聯絡',
+        'contact.heading': '一起用你的數據打造點什麼。',
+        'contact.body': 'Torsade Technologies Company Limited 是一家服務型企業，協助餐旅產業更善用自身數據。歡迎告訴我們你的需求，我們會盡快與你聯繫。',
+        'footer.copyright': '© 2026 Torsade Technologies Company Limited. 版權所有。'
+      }
+    };
+
+    var langToggle = document.getElementById('langToggle');
+
+    function applyLang(lang) {
+      if (!I18N[lang]) lang = 'en';
+      var dict = I18N[lang];
+      document.querySelectorAll('[data-i18n]').forEach(function (el) {
+        var val = dict[el.getAttribute('data-i18n')];
+        if (val != null) el.innerHTML = val;
+      });
+      document.documentElement.lang = (lang === 'zh') ? 'zh-Hant' : 'en';
+      if (langToggle) {
+        // Button shows the *other* language you can switch to.
+        langToggle.textContent = (lang === 'zh') ? 'EN' : '中';
+        langToggle.setAttribute('aria-label', (lang === 'zh') ? 'Switch to English' : '切換至繁體中文');
+      }
+      try { localStorage.setItem('torsade-lang', lang); } catch (e) {}
+      window.__txLang = lang;
+    }
+
+    (function initLang() {
+      var saved;
+      try { saved = localStorage.getItem('torsade-lang'); } catch (e) {}
+      var lang = saved || ((navigator.language || '').toLowerCase().indexOf('zh') === 0 ? 'zh' : 'en');
+      applyLang(lang);
+      if (langToggle) {
+        langToggle.addEventListener('click', function () {
+          applyLang(window.__txLang === 'zh' ? 'en' : 'zh');
+        });
+      }
+    })();
+  </script>
+</body>
+</html>
