@@ -374,7 +374,13 @@
     (function initLang() {
       var saved;
       try { saved = localStorage.getItem('torsade-lang'); } catch (e) {}
-      var lang = saved || ((navigator.language || '').toLowerCase().indexOf('zh') === 0 ? 'zh' : 'en');
+      // NOTE (temporary): Browser language detection is disabled — the site defaults to
+      // English for first-time visitors. A saved preference (localStorage 'torsade-lang')
+      // is still respected, so switching via the toggle persists. To revert to
+      // auto-detecting the browser locale, restore the commented-out line below and
+      // delete the "var lang = saved || 'en';" line.
+      // var lang = saved || ((navigator.language || '').toLowerCase().indexOf('zh') === 0 ? 'zh' : 'en');
+      var lang = saved || 'en';
       applyLang(lang);
       if (langToggle) {
         langToggle.addEventListener('click', function () {
